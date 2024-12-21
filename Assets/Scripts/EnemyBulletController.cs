@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBulletController : MonoBehaviour
 {
-    public float speed = 3f;
+    public float speed = 2.5f;
     public Transform playerTransform;
     public Rigidbody2D rb;
     private Vector3 direction;
@@ -29,7 +29,7 @@ public class EnemyBulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("SpaceShooterPlayerShip"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.playerController.HittedByBullet();
             Destroy(collision.gameObject);

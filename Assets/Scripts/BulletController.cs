@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    public float moveSpeed = 3.5f;
     public Rigidbody2D rb;
-    public float destroyYValue = 6f;
+    public float destroyYValue = 6.5f;
 
     void Start()
     {
@@ -29,13 +29,13 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("SpaceShooterEnemyShip"))
+        if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("Mocne Pierdolniecie");
-
             Destroy(collision.gameObject);
-
             Destroy(gameObject);
+
+            GameManager.uiManager.AddScore(100); // Dodaj 100 punktów
+            Debug.Log("Wrog Zniszczony!");
         }
     }
 }

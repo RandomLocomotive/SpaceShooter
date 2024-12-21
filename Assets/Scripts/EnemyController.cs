@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed = 0.6f;
+    public float speed = 0.55f;
     public float fireRate = 1f;
     private float timeSinceLastAction = 0f;
 
@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         if (transform.position.y > -2)
             Shoot();

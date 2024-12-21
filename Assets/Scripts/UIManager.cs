@@ -1,34 +1,58 @@
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject hp1;
-    public GameObject hp2;
-    public GameObject hp3;
+    public RawImage heart1;
+    public RawImage heart2;
+    public RawImage heart3;
+    public RawImage heart4;
+    public RawImage heart5;
 
-    public List<GameObject> hpPointsList = new List<GameObject>();
+    public TMPro.TextMeshProUGUI Points;
+    private int score = 0;  // poczatkowy wynik
+    private int currentHealth;
 
-    // Start is called before the first frame update
     void Start()
     {
-        GameManager.uiManager = this;
+        currentHealth = 5;  // start
+        UpdateHealthUI(currentHealth);
+        UpdateScoreText();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateHealthUI(int currentHealth)
     {
-        
+        heart1.enabled = currentHealth >= 1;
+        heart2.enabled = currentHealth >= 2;
+        heart3.enabled = currentHealth >= 3;
+        heart4.enabled = currentHealth >= 4;
+        heart5.enabled = currentHealth >= 5;
     }
 
-    /* Player HP
-    3         2
-    2         1
-    1         0
-    */
-    public void DisableHpSprite(int value)
+    public void AddScore(int amount)
     {
-        hpPointsList[value-1].SetActive(false);
+        score += amount;
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        if (Points != null)
+        {
+            Points.text = "Points: " + score;
+        }
+        else
+        {
+            Debug.LogError("Points Text is not assigned in UIManager.");
+        }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Koniec gry!");
+        // blah blah
     }
 }
