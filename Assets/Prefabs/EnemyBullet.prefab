@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df11fce02087670459cd70e2086be47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.9
   playerTransform: {fileID: 6562730536875753993, guid: 9637e967867b6794aa80ced636207da6,
     type: 3}
   rb: {fileID: -1229295337562633632}

@@ -1,35 +1,38 @@
-using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public RawImage heart1;
-    public RawImage heart2;
-    public RawImage heart3;
-    public RawImage heart4;
-    public RawImage heart5;
-
-    public TMPro.TextMeshProUGUI Points;
-    private int score = 0;  // poczatkowy wynik
+    public GameObject[] hearts; // Tablica serduszek (RawImage: Health1, Health2, itd.)
+    public TextMeshProUGUI scoreText; 
     private int currentHealth;
+    private int score = 0;
 
     void Start()
     {
-        currentHealth = 5;  // start
-        UpdateHealthUI(currentHealth);
+        currentHealth = hearts.Length; // Zdrowie = liczba serduszek
+        GameManager.uiManager = this;
         UpdateScoreText();
     }
 
-    public void UpdateHealthUI(int currentHealth)
+    public void ReduceHealth(int amount)
     {
-        heart1.enabled = currentHealth >= 1;
-        heart2.enabled = currentHealth >= 2;
-        heart3.enabled = currentHealth >= 3;
-        heart4.enabled = currentHealth >= 4;
-        heart5.enabled = currentHealth >= 5;
+        currentHealth -= amount;
+
+        for (int i = hearts.Length - 1; i >= 0; i--)
+        {
+            if (i >= currentHealth)
+            {
+                hearts[i].SetActive(false); // Ukryj serduszko
+            }
+        }
+
+        if (currentHealth <= 0)
+        {
+            GameOver();
+        }
     }
 
     public void AddScore(int amount)
@@ -40,19 +43,19 @@ public class UIManager : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        if (Points != null)
+        if (scoreText != null)
         {
-            Points.text = "Points: " + score;
+            scoreText.text = "Points: " + score;
         }
         else
         {
-            Debug.LogError("Points Text is not assigned in UIManager.");
+            Debug.LogError("Score Text (TextMeshProUGUI) nie jest przypisany w UIManager!");
         }
     }
 
     private void GameOver()
     {
-        Debug.Log("Koniec gry!");
-        // blah blah
+        Debug.Log("Koniec gry");
+        // Tutaj możesz dodać inne akcje końca gry
     }
 }

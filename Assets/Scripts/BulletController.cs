@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float moveSpeed = 3.5f;
+    public float moveSpeed = 3.6f;
     public Rigidbody2D rb;
     public float destroyYValue = 6.5f;
 
@@ -34,8 +34,15 @@ public class BulletController : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
 
-            GameManager.uiManager.AddScore(100); // Dodaj 100 punktów
-            Debug.Log("Wrog Zniszczony!");
+            if (GameManager.uiManager != null) // sprawdzic czy referencja istnieje
+            {
+                GameManager.uiManager.AddScore(100); // dodaj 100 pkt
+                Debug.Log("Wrog Zniszczony!");
+            }
+        }
+        else
+        {
+            Debug.Log("GameManager.uiManager nie jest poprawnie ustawiony.");
         }
     }
 }

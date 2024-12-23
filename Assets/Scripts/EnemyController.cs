@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed = 0.55f;
-    public float fireRate = 1f;
+    public float speed = 0.5f;
+    public float fireRate = 2f;
     private float timeSinceLastAction = 0f;
 
     public GameObject bulletPrefab;
@@ -24,11 +24,6 @@ public class EnemyController : MonoBehaviour
         if (transform.position.y > -2)
             Shoot();
 
-        if (transform.position.y < -5.5f)
-        {
-            GameManager.playerController.HittedByBullet();
-            Destroy(gameObject);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
