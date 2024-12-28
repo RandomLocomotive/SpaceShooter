@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartButtonScript : MonoBehaviour
 {
-    public int gameStartScene;
-
     public void StartGame()
     {
-        SceneManager.LoadScene(gameStartScene);
+        SceneManager.LoadScene(1);
+        Debug.Log("Laduje: "+ 1);
     }
 }

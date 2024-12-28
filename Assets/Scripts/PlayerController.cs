@@ -1,8 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     public int hp = 5; // max hp
     public float moveSpeed = 3f;
 
@@ -21,6 +28,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.uiManager == null)
+        {
+            Debug.Log("GameManager.uiManager nie został zainicjalizowany");
+            return;
+        }
+
         GameManager.playerController = this;
         GameManager.uiManager.ReduceHealth(0); // Ustaw serca zgodnie z obecnym HP
         objectRenderer = GetComponent<MeshRenderer>(); // pobiersz MeshRenderer
@@ -38,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (hp <= 0)
         {
             Debug.Log("Koniec gry");
-            Application.Quit();
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -86,7 +99,7 @@ public class PlayerController : MonoBehaviour
             hp -= 1; // Zmniejsz zdrowie gracza
             GameManager.uiManager.ReduceHealth(1); // ukryj jedno serduszko w UI
             Debug.Log("Trafiono! HP: " + hp);
-
+            audioManager.PlaySFX(audioManager.playerhit, 0.2f);
             StartCoroutine(InvulnerabilityCooldown()); // uruchom efekt nietykalnosci
         }
     }
