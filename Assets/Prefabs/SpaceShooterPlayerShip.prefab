@@ -226,14 +226,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
-  moveSpeed: 4
+  moveSpeed: 4.1
   minXValue: {fileID: 0}
   maxXValue: {fileID: 0}
   bulletPrefab: {fileID: 4958895268230460898, guid: 6908e12104317ec4aba196c0d90f3795,
     type: 3}
   gunEndPosition: {fileID: 7894094474085628100}
   fireRate: 0.25
-  invulnerabilityDuration: 0.5
+  invulnerabilityDuration: 2.5
 --- !u!4 &6562730536875753993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d1686ea47bcba1d419052d4d689cee6f,

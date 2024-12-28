@@ -34,9 +34,9 @@ public class BulletController : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
 
-            if (GameManager.uiManager != null) // sprawdzic czy referencja istnieje
+            if (GameManager.uiManager != null)
             {
-                GameManager.uiManager.AddScore(100); // dodaj 100 pkt
+                GameManager.uiManager.AddScore(100);
                 Debug.Log("Wrog Zniszczony!");
             }
         }

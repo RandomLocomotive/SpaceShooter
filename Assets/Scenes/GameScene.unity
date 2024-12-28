@@ -393,6 +393,7 @@ MonoBehaviour:
   enemyshoot: {fileID: 8300000, guid: 637c94e7bc5ded248a52445a4088fbb3, type: 3}
   playerhit: {fileID: 8300000, guid: 336d3c0e1c9deea4e938bacfa6f6f6b2, type: 3}
   enemydeath: {fileID: 8300000, guid: 835b6a70ed342cc48a57e3210668f1e6, type: 3}
+  musicVolume: 0.2
 --- !u!4 &606700498
 Transform:
   m_ObjectHideFlags: 0
@@ -568,14 +569,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
-  moveSpeed: 4
+  moveSpeed: 4.1
   minXValue: {fileID: 5233664102038320357}
   maxXValue: {fileID: 2770793313511704832}
   bulletPrefab: {fileID: 4958895268230460898, guid: 6908e12104317ec4aba196c0d90f3795,
     type: 3}
   gunEndPosition: {fileID: 6961428155412317942}
   fireRate: 0.25
-  invulnerabilityDuration: 0
+  invulnerabilityDuration: 2.5
 --- !u!1 &111583806312108306
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip playerhit;
     public AudioClip enemydeath;
 
+    [Header("--- Settings ---")]
+    [Range(0f, 1f)]
+    public float musicVolume = 0.2f;
+
     private void Start()
     {
         musicSource.clip = background;
+        musicSource.volume = musicVolume;
         musicSource.Play();
-        musicSource.volume = 0.2f;
     }
 
     public void PlaySFX(AudioClip clip, float volume = 1f)

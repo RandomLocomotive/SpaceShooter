@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
-    public int hp = 5; // max hp
+    public int hp = 5;
     public float moveSpeed = 3f;
 
     public Transform minXValue;
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     private float timeSinceLastAction = 0f;
 
     private bool isInvulnerable = false;
-    public float invulnerabilityDuration = 0.5f; // czas nietykalnosci po trafieniu
-    private MeshRenderer objectRenderer; // komponent MeshRenderer dla 3D
+    public float invulnerabilityDuration = 2.5f;
+    private MeshRenderer objectRenderer;
 
     void Start()
     {
@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
         }
 
         GameManager.playerController = this;
-        GameManager.uiManager.ReduceHealth(0); // Ustaw serca zgodnie z obecnym HP
-        objectRenderer = GetComponent<MeshRenderer>(); // pobiersz MeshRenderer
+        GameManager.uiManager.ReduceHealth(0);
+        objectRenderer = GetComponent<MeshRenderer>();
     }
 
     void Update()
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
         if (timeSinceLastAction >= fireRate)
         {
+            audioManager.PlaySFX(audioManager.playershoot, 0.15f);
             Instantiate(bulletPrefab, gunEndPosition.position, Quaternion.identity);
             timeSinceLastAction = 0;
         }
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("EnemyBullet") && !isInvulnerable)
         {
             HittedByBullet();
-            Destroy(collider.gameObject); // zniszcz pocisk wroga
+            Destroy(collider.gameObject);
         }
     }
 
@@ -96,11 +97,11 @@ public class PlayerController : MonoBehaviour
     {
         if (hp > 0)
         {
-            hp -= 1; // Zmniejsz zdrowie gracza
-            GameManager.uiManager.ReduceHealth(1); // ukryj jedno serduszko w UI
+            hp -= 1;
+            GameManager.uiManager.ReduceHealth(1);
             Debug.Log("Trafiono! HP: " + hp);
-            audioManager.PlaySFX(audioManager.playerhit, 0.2f);
-            StartCoroutine(InvulnerabilityCooldown()); // uruchom efekt nietykalnosci
+            audioManager.PlaySFX(audioManager.playerhit, 0.22f);
+            StartCoroutine(InvulnerabilityCooldown());
         }
     }
 
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
         isInvulnerable = true;
         StartCoroutine(BlinkEffect());
         yield return new WaitForSeconds(invulnerabilityDuration);
-        isInvulnerable = false; // moze otrzymac obrazenia?
+        isInvulnerable = false;
     }
 
     private IEnumerator BlinkEffect()
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
         while (elapsedTime < invulnerabilityDuration)
         {
             objectRenderer.enabled = !objectRenderer.enabled;
-            elapsedTime += 0.1f; // wait 0.1 sekundy
+            elapsedTime += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
         objectRenderer.enabled = true;

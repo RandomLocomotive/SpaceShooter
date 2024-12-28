@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  fireRate: 0.5
+  fireRate: 1.25
   bulletPrefab: {fileID: 4958895268230460898, guid: 477898234060d5547a29be4bf698eed4,
     type: 3}
   enemyGunEnd: {fileID: 162004910566723415}
